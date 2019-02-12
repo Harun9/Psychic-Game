@@ -2,33 +2,46 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Psychic Game</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" media="screen" href="assets/css/style.css">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Are you psychic?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="assets/css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet" />
+    <script src="assets/javascript/game.js"></script>
 </head>
 
 <body>
-    <!-----write the title of the game-->
-    <h1>Psychic Game</h1>
-    <strong>
-        <p>Which letter I am thinking</p>
-    </strong>
-    <!--win counter-->
-    <p>wins: <span id="wins">0</span></p>
-    <!--Loss counter-->
 
-    <p>loss: <span id="loos">0</span></p>
-    <!---->
-    <p>Guess left:<span id="guessesleft"></span></p>
-    <!--guessesleft-->
-    <p>Your Guesses so far:<span id="guesses-so-far"></span></p>
-    <!--link to javascript game.js-->
-    <script type="text/javascript" src="assets/javascript/game.js"></script>
+    <h1>The Psychic Game</h1>
+    </br>
+    <div class="wrapper">
+        <p id="question">Do you know what letter I'm thinking of ?</p>
 
 
+        <br />
+        <img src="assets/images/psychic2.jpeg" width="300" height="400">
 
+        <div class="metrics">
+            <p>
+                Wins:
+                <span id="wins"> </span>
+            </p>
+            <p>
+                Losses:
+                <span id="losses"> </span>
+            </p>
+            <p>
+                Guesses Left:
+                <span id="remainingGuesses">9</span>
+            </p>
+            <p>
+                Your guesses so far:
+                <span id="guessedLetters"> </span>
+            </p>
+        </div>
+    </div>
 </body>
+<footer>Harun Abdi 2019 &#169;</footer>
 
 </html>

@@ -1,80 +1,90 @@
-//creating an array 
-var Letters = ["r", "u", "s"]
-
-// this array will have  what the user guesses
-var guessedLetters = [];
-
-// this variable randomly assign on the three letters 
-var letterToGuess = null;
-
-// this is countown 
-var guessesLeft = 10;
-
-
-//count for the win /loss
-
-var wins = 0;
-var loss = 0;
-
-// here we will have three function to  updateGuesses , updateGuessesLeft and updateGuessesSoFar
-
-var updateGuessesLeft = function () {
-    // selecting querySelector  from html
-    document.querySelector("#guessesleft").innerHTML = guessesLeft;
-}
-// you will get random letter to guess from the array and assign it based on random generator we are only concnerned about the three letter that are in our array
-var updateGuesses = function () {
-    letterToGuess = Letters[Math.floor(Math.random() * Letters.length)]
+// Creating a function to determine if user correctly guessed
+function pyschic(user, computer) {
+    if (user === computer) {
+        return "Win";
+    } else {
+        return "Incorrect";
+    }
 }
 
-// we will take the guess of the user and display it as letters  which will be seperated by commas 
-var updateGuessesSoFar = function () {
-    document.querySelector("#guesses-so-far").innerHTML = guessedLetters.join(",");
+// Checking whether user input is in the userChoices array
+function inArray(user, arr) {
+    var count = arr.length;
+    for (var i = 0; i < count; i++) {
+        if (arr[i] === user) {
+            return true;
+        }
+    }
+    return false;
 }
 
-// Function will be called when we reset everything
-var reset = function () {
+// Reset the funtion after a win/loss
+function reset() {
     guessesLeft = 10;
     guessedLetters = [];
-    updateLetterToGuess();
-    updateGuessesLeft();
-    updateGuessesSoFar();
-};
-// This function will capture the keyboard clicks.
-document.onkeydown = function (event) {
-    // It's going to reduce the guesses by one
-    guessesLeft--;
-
-    // Lowercase the letter
-    var letter = String.fromCharCode(event.which).toLowerCase();
-
-    // Then add the guess to the guessedLetters array
-    guessedLetters.push(letter);
-
-    // Then its going to run the update functions
-    updateGuessesLeft();
-    updateGuessesSoFar();
-
-
-    // We'll check if there's a match.
-    if (letter === letterToGuess) {
-
-        // If there is then we win and we'll update the HTML to display the win.
-        wins++;
-        document.querySelector("#wins").innerHTML = wins;
-
-        // Then we'll reset the game
-        reset();
-    }
-
-    // If we are out of guesses...
-    if (guessesLeft === 0) {
-
-        // Then we will loss and we'll update the HTML to display the loss.
-        losses++;
-        document.querySelector("#losses").innerHTML = losses;
-
-        // Then we'll call the reset.
-        reset();
-    }
+    computerLetter =
+        computerChoices[Math.floor(Math.random() * computerChoices.length)];
 }
+
+// Creates an array for the computer choices (entire alphabet - lowercase)
+computerChoices = [];
+for (i = 100; i <= 122; i++) {
+    computerChoices[computerChoices.length] = String.fromCharCode(i);
+}
+
+// Connect variables to HTML & starting position
+var wins = 0;
+var losses = 0;
+var guessesLeft = 10;
+var guessedLetters = [];
+
+// Get computer's guess
+var computerLetter =
+    computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+// This function is run whenever the user presses a key.
+document.onkeyup = function (event) {
+    // Checking what the computer generated for testing purposes
+    console.log(computerLetter);
+
+    // Determines which key was pressed.
+    var userGuess = event.key;
+    console.log(userGuess);
+
+    // Checks if input is accpetable
+    var validLetter = inArray(userGuess, computerChoices);
+    console.log(validLetter);
+
+    // creating a "result" variable for the resilt of the psychic function
+    var result = pyschic(userGuess, computerLetter);
+    console.log(result);
+
+    // Creating an "If" stmt to first check if valids input, and then if win/incorrect result
+    if (validLetter == true) {
+        // Creating an "If" stmt to tell what to do for a win/incorrect result
+        if (result == "Win") {
+            // add a win into the log
+            wins++;
+            reset();
+        } else {
+            // reduce the guesses left
+            guessesLeft--;
+            // record the guesses so far
+            guessedLetters.push(userGuess);
+        }
+
+        if (guessesLeft == 0) {
+            // add a loss into the log
+            losses++;
+            reset();
+        }
+    } else {
+        alert("Invalid input! Please use the alphabet :)");
+    }
+
+    // Changing HTML text
+    document.getElementById("wins").innerHTML = wins;
+    document.getElementById("losses").innerHTML = losses;
+    document.getElementById("remainingGuesses").innerHTML = guessesLeft;
+    document.getElementById("guessedLetters").innerHTML = guessedLetters;
+};
