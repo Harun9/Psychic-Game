@@ -1,3 +1,4 @@
+
 var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var wins = 0;
 var losses = 0;
@@ -19,6 +20,7 @@ document.onkeyup = function (event) {
 
     if (compGuess != userGuess) {
         remainingGuesses--;
+        console.log(remainingGuesses);
 
     }
 
@@ -30,6 +32,6 @@ document.onkeyup = function (event) {
     // Changing HTML text
     document.getElementById("wins").innerHTML = wins;
     document.getElementById("losses").innerHTML = losses;
-    document.getElementById("remainingGuesses").innerHTML = guessesLeft;
+    document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
     document.getElementById("guessedLetters").innerHTML = guessedLetters;
 };
